@@ -58,7 +58,7 @@
                                                         <label for="latitude"> Distrik <span class="text-danger">*</span>
                                                         </label>
                                                         <select class="form-control" aria-label="Default select example"
-                                                            name="distrik_id">
+                                                            name="distrik_id" @if (Request::segment(3) == 'detail') {{ 'disabled' }} @endif>
                                                             <option value="">Pilih Distrik</option>
                                                             @foreach ($distrik as $d)
 

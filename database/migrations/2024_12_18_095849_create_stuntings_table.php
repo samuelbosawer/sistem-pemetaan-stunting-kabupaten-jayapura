@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('stuntings', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('pendek')->nullable();
-            $table->bigInteger('sangat_pendek')->nullable();
-            $table->bigInteger('jumlah_balita')->nullable();
+            $table->string('pendek')->nullable();
+            $table->string('sangat_pendek')->nullable();
+            $table->string('jumlah_balita')->nullable();
             $table->bigInteger('puskesmas_id')->nullable();
 
             $table->timestamps();

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Puskesmas;
+use App\Models\Stunting;
 use Illuminate\Http\Request;
 
 class StuntingController extends Controller
@@ -9,7 +11,17 @@ class StuntingController extends Controller
     public function index(Request $request)
     {
 
-        return 'stunting/index';
+        $datas = Stunting::where([
+            [function ($query) use ($request) {
+                if (($s = $request->s)) {
+                    $query->orWhere('pendek', 'LIKE', '%' . $s . '%')
+                        ->orWhere('sangat_pendek', 'LIKE', '%' . $s . '%')
+                        ->orWhere('jumlah_balita', 'LIKE', '%' . $s . '%')
+                        ->get();
+                }
+            }]
+        ])->orderBy('id', 'desc')->paginate(10);
+        return view('admin.stunting.index',compact('datas'))->with('i',(request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -17,7 +29,8 @@ class StuntingController extends Controller
      */
     public function create()
     {
-        return 'stunting/create';
+        $puskesmas = Puskesmas::get();
+        return view('admin.stunting.create', compact('puskesmas'));
     }
 
     /**
@@ -25,7 +38,27 @@ class StuntingController extends Controller
      */
     public function store(Request $request)
     {
-        return 'stunting/store';
+
+        $request->validate(
+            [
+                'puskesmas_id' => 'required',
+
+            ],
+            [
+                'puskesmas_id.required' => 'Tidak boleh kosong',
+            ]
+        );
+        $data = new Stunting();
+
+        $data->puskesmas_id   = $request->puskesmas_id;
+        $data->pendek   = $request->pendek;
+        $data->sangat_pendek   = $request->sangat_pendek;
+        $data->jumlah_balita   = $request->jumlah_balita;
+
+        $data->save();
+        alert()->success('Berhasil', 'Tambah data berhasil')->autoclose(3000);
+        return redirect()->route('admin.stunting');
+
     }
 
     /**
@@ -33,7 +66,9 @@ class StuntingController extends Controller
      */
     public function show(string $id)
     {
-        return 'stunting/show';
+        $puskesmas = Puskesmas::get();
+        $data = Stunting::where('id',$id)->first();
+        return view('admin.stunting.create', compact('puskesmas','data'));
 
     }
 
@@ -42,7 +77,9 @@ class StuntingController extends Controller
      */
     public function edit(string $id)
     {
-        return 'stunting/edit';
+        $puskesmas = Puskesmas::get();
+        $data = Stunting::where('id',$id)->first();
+        return view('admin.stunting.create', compact('puskesmas','data'));
     }
 
     /**
@@ -50,7 +87,26 @@ class StuntingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return 'stunting/update';
+        $request->validate(
+            [
+                'puskesmas_id' => 'required',
+
+            ],
+            [
+                'puskesmas_id.required' => 'Tidak boleh kosong',
+            ]
+        );
+        $data = Stunting::find($id);
+
+        $data->puskesmas_id   = $request->puskesmas_id;
+        $data->pendek   = $request->pendek;
+        $data->sangat_pendek   = $request->sangat_pendek;
+        $data->jumlah_balita   = $request->jumlah_balita;
+
+        $data->update();
+        alert()->success('Berhasil', 'Ubah data berhasil')->autoclose(3000);
+        return redirect()->route('admin.stunting');
+
     }
 
     /**
@@ -58,7 +114,9 @@ class StuntingController extends Controller
      */
     public function destroy(string $id)
     {
-        return 'stunting/destroy';
+        $data = Stunting::find($id);
+        $data->delete();
+        return redirect()->back();
     }
 
 
