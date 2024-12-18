@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelurahan;
+use App\Models\Puskesmas;
 use Illuminate\Http\Request;
 
 class PuskesmasController extends Controller
@@ -9,7 +11,17 @@ class PuskesmasController extends Controller
     public function index(Request $request)
     {
 
-        return 'puskesmas/index';
+        $datas = Puskesmas::where([
+            ['nama_puskesmas', '!=', Null],
+            [function ($query) use ($request) {
+                if (($s = $request->s)) {
+                    $query->orWhere('nama_puskesmas', 'LIKE', '%' . $s . '%')
+                        ->orWhere('keterangan', 'LIKE', '%' . $s . '%')
+                        ->get();
+                }
+            }]
+        ])->orderBy('id', 'desc')->paginate(10);
+        return view('admin.puskesmas.index',compact('datas'))->with('i',(request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -17,7 +29,8 @@ class PuskesmasController extends Controller
      */
     public function create()
     {
-        return 'puskesmas/create';
+        $kelurahan = Kelurahan::get();
+        return view('admin.puskesmas.create', compact('kelurahan'));
     }
 
     /**
@@ -25,7 +38,31 @@ class PuskesmasController extends Controller
      */
     public function store(Request $request)
     {
-        return 'puskesmas/store';
+        $request->validate(
+            [
+                'nama_puskesmas' => 'required',
+                'kelurahan_id' => 'required',
+            ],
+            [
+                'nama_puskesmas.required' => 'Tidak boleh kosong',
+                'kelurahan_id.required' => 'Tidak boleh kosong',
+            ]
+        );
+        $data = new Puskesmas();
+
+        $data->nama_puskesmas   = $request->nama_puskesmas;
+
+        $kel = Kelurahan::find($request->kelurahan_id);
+
+        // dd($kel);
+        $data->distrik_id   = $kel->distrik_id;
+        $data->kelurahan_id   = $request->kelurahan_id;
+        $data->keterangan   = $request->keterangan;
+
+        $data->save();
+        alert()->success('Berhasil', 'Tambah data berhasil')->autoclose(3000);
+        return redirect()->route('admin.puskesmas');
+
     }
 
     /**
@@ -33,8 +70,11 @@ class PuskesmasController extends Controller
      */
     public function show(string $id)
     {
-        return 'puskesmas/show';
+        $kelurahan = Kelurahan::get();
+        $data = Puskesmas::where('id',$id)->first();
+        $caption = 'Detail Data Puskesmas';
 
+        return view('admin.puskesmas.create', compact('kelurahan','data','caption'));
     }
 
     /**
@@ -42,7 +82,11 @@ class PuskesmasController extends Controller
      */
     public function edit(string $id)
     {
-        return 'puskesmas/edit';
+        $kelurahan = Kelurahan::get();
+        $data = Puskesmas::where('id',$id)->first();
+        $caption = 'Ubah Data Puskesmas';
+        return view('admin.puskesmas.create', compact('kelurahan','data','caption'));
+
     }
 
     /**
@@ -50,7 +94,30 @@ class PuskesmasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return 'puskesmas/update';
+        $request->validate(
+            [
+                'nama_puskesmas' => 'required',
+                'kelurahan_id' => 'required',
+            ],
+            [
+                'nama_puskesmas.required' => 'Tidak boleh kosong',
+                'kelurahan_id.required' => 'Tidak boleh kosong',
+            ]
+        );
+        $data = Puskesmas::find($id);
+
+        $data->nama_puskesmas   = $request->nama_puskesmas;
+
+        $kel = Kelurahan::find($request->kelurahan_id);
+
+        // dd($kel);
+        $data->distrik_id   = $kel->distrik_id;
+        $data->kelurahan_id   = $request->kelurahan_id;
+        $data->keterangan   = $request->keterangan;
+
+        $data->update();
+        alert()->success('Berhasil', 'Ubah data berhasil')->autoclose(3000);
+        return redirect()->route('admin.puskesmas');
     }
 
     /**
@@ -58,7 +125,9 @@ class PuskesmasController extends Controller
      */
     public function destroy(string $id)
     {
-        return 'puskesmas/destroy';
+        $data = Puskesmas::find($id);
+        $data->delete();
+        return redirect()->back();
     }
 
 
