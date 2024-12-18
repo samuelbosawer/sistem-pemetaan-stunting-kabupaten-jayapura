@@ -3,13 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Kelurahan;
+use App\Models\Distrik;
+
 
 class KelurahanController extends Controller
 {
     public function index(Request $request)
     {
-
-        return 'kelurahan/index';
+        $datas = Kelurahan::where([
+            ['nama_kelurahan', '!=', Null],
+            [function ($query) use ($request) {
+                if (($s = $request->s)) {
+                    $query->orWhere('nama_kelurahan', 'LIKE', '%' . $s . '%')
+                        ->orWhere('keterangan', 'LIKE', '%' . $s . '%')
+                        ->get();
+                }
+            }]
+        ])->orderBy('id', 'desc')->paginate(10);
+        return view('admin.kelurahan.index',compact('datas'))->with('i',(request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -17,7 +29,8 @@ class KelurahanController extends Controller
      */
     public function create()
     {
-        return 'kelurahan/create';
+        $distrik = Distrik::get();
+        return view('admin.kelurahan.create', compact('distrik'));
     }
 
     /**
@@ -25,7 +38,30 @@ class KelurahanController extends Controller
      */
     public function store(Request $request)
     {
-        return 'kelurahan/store';
+
+        $request->validate(
+            [
+                'nama_kelurahan' => 'required',
+                'distrik_id' => 'required',
+            ],
+            [
+                'nama_kelurahan.required' => 'Tidak boleh kosong',
+                'distrik_id.required' => 'Tidak boleh kosong',
+            ]
+        );
+        $data = new Kelurahan();
+
+        $data->nama_kelurahan   = $request->nama_kelurahan;
+        $data->distrik_id   = $request->distrik_id;
+        $data->latitude   = $request->latitude;
+        $data->longitude   = $request->longitude;
+        $data->keterangan   = $request->keterangan;
+
+        $data->save();
+        alert()->success('Berhasil', 'Tambah data berhasil')->autoclose(3000);
+        return redirect()->route('admin.kelurahan');
+
+
     }
 
     /**
@@ -33,7 +69,10 @@ class KelurahanController extends Controller
      */
     public function show(string $id)
     {
-        return 'kelurahan/show';
+        $data = Kelurahan::where('id',$id)->first();
+        $distrik = Distrik::get();
+        $caption = 'Detail Data Kelurahan';
+        return view('admin.kelurahan.create',compact('data','caption','distrik'));
 
     }
 
@@ -42,7 +81,10 @@ class KelurahanController extends Controller
      */
     public function edit(string $id)
     {
-        return 'kelurahan/edit';
+        $data = Kelurahan::where('id',$id)->first();
+        $distrik = Distrik::get();
+        $caption = 'Ubah Data Kelurahan';
+        return view('admin.kelurahan.create',compact('data','caption','distrik'));
     }
 
     /**
@@ -50,7 +92,26 @@ class KelurahanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return 'kelurahan/update';
+        $request->validate(
+            [
+                'nama_kelurahan' => 'required',
+                'distrik_id' => 'required',
+            ],
+            [
+                'nama_kelurahan.required' => 'Tidak boleh kosong',
+                'distrik_id.required' => 'Tidak boleh kosong',
+            ]
+        );
+        $data = Kelurahan::find($id);
+        $data->nama_kelurahan   = $request->nama_kelurahan;
+        $data->distrik_id   = $request->distrik_id;
+        $data->latitude   = $request->latitude;
+        $data->longitude   = $request->longitude;
+        $data->keterangan   = $request->keterangan;
+
+        $data->save();
+        alert()->success('Berhasil', 'Tambah data berhasil')->autoclose(3000);
+        return redirect()->route('admin.kelurahan');
     }
 
     /**
@@ -58,7 +119,9 @@ class KelurahanController extends Controller
      */
     public function destroy(string $id)
     {
-        return 'kelurahan/destroy';
+        $data = Kelurahan::find($id);
+        $data->delete();
+        return redirect()->back();
     }
 
 
