@@ -18,8 +18,7 @@
 
 
                      {{-- <li class="menu-title mt-2">DATA MASTER</li> --}}
-
-
+                     @if(Auth::user()->hasRole('admindinas'))
                      <li>
                         <a href="{{route('admin.distrik')}}">
                             <i data-feather="grid"></i>
@@ -46,6 +45,12 @@
                             <span> Data Stunting </span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{route('admin.clustering')}}">
+                            <i data-feather="aperture"></i>
+                            <span> Data Clustering </span>
+                        </a>
+                    </li>
 
                     {{-- <li class="menu-title mt-2">INFORMASI & PUBLIKASI</li> --}}
 
@@ -55,6 +60,49 @@
                             <span> Pengguna </span>
                         </a>
                     </li>
+
+                     @endif
+
+                     @if(Auth::user()->hasRole('adminpuskesmas'))
+
+                     <li>
+                        <a href="{{route('admin.faktor')}}">
+                            <i data-feather="slack"></i>
+                            <span>  Faktor Stunting </span>
+                        </a>
+                    </li>
+
+
+                     <li>
+                        <a href="{{route('admin.clustering')}}">
+                            <i data-feather="aperture"></i>
+                            <span>  Clustering </span>
+                        </a>
+                    </li>
+
+                     @endif
+
+
+
+                     @if(Auth::user()->hasRole('kepaladinas'))
+
+                     <li>
+                        <a href="{{route('admin.puskesmas')}}">
+                            <i data-feather="home"></i>
+                            <span>  Puskesmas </span>
+                        </a>
+                    </li>
+
+
+                     <li>
+                        <a href="{{route('admin.clustering')}}">
+                            <i data-feather="aperture"></i>
+                            <span>  Clustering </span>
+                        </a>
+                    </li>
+
+                     @endif
+
 
                     <li>
                         <a href="{{route('logout')}}"  onclick="event.preventDefault();

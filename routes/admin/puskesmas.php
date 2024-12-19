@@ -3,7 +3,7 @@
 use App\Http\Controllers\PuskesmasController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['role:admindinas']], function () {
+Route::group(['middleware' => ['role:admindinas|kepaladinas']], function () {
 
     Route::controller(PuskesmasController::class)->group(function(){
         Route::get('puskesmas', [PuskesmasController::class, 'index'])->name('puskesmas');
@@ -15,5 +15,8 @@ Route::group(['middleware' => ['role:admindinas']], function () {
         Route::put('puskesmas/{id}', [PuskesmasController::class, 'update'])->name('puskesmas.update')->middleware(['role:admindinas']);
         Route::get('puskesmas/excel', [PuskesmasController::class, 'excel'])->name('puskesmas.excel');
         Route::get('puskesmas/pdf', [PuskesmasController::class, 'pdf'])->name('puskesmas.pdf');
+
+        Route::post('puskesmas/csv', [PuskesmasController::class, 'csv'])->name('puskesmas.csv');
+
     });
 });

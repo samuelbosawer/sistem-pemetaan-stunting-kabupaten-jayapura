@@ -15,5 +15,7 @@ Route::group(['middleware' => ['role:admindinas']], function () {
         Route::put('kelurahan/{id}', [KelurahanController::class, 'update'])->name('kelurahan.update')->middleware(['role:admindinas']);
         Route::get('kelurahan/excel', [KelurahanController::class, 'excel'])->name('kelurahan.excel');
         Route::get('kelurahan/pdf', [KelurahanController::class, 'pdf'])->name('kelurahan.pdf');
+
+        Route::post('kelurahan/csv', [KelurahanController::class, 'csv'])->name('kelurahan.csv');
     });
 });

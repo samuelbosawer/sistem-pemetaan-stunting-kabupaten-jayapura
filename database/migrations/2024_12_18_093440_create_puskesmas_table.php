@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('puskesmas', function (Blueprint $table) {
             $table->id();
             $table->string('nama_puskesmas');
-            $table->bigInteger('kelurahan_id')->nullable();
+            // $table->bigInteger('kelurahan_id')->nullable();
             $table->bigInteger('distrik_id')->nullable();
             $table->string('keterangan')->nullable();
             $table->timestamps();

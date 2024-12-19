@@ -26,8 +26,53 @@
                                     </div>
 
                                     <div class="">
+
+                                        @if(Auth::user()->hasRole('admindinas'))
                                             <a class="btn btn-dark" href="{{route('admin.puskesmas.tambah')}}"> Tambah Data <i data-feather="plus"></i></a>
-                                        <!-- <a class="btn btn-success" href="">Cetak Excel <i data-feather="printer"></i></a> -->
+                                            <button type="button" class="btn btn-success"data-toggle="modal"
+                                            data-target="#exampleModal">Upload file CSV
+                                            <i data-feather="upload"></i></button>
+
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Upload File CSV</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="{{route('admin.puskesmas.csv')}}" method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="modal-body">
+                                                            <div class="modal-body">
+                                                                <label for="csv"> File CSV <span
+                                                                        class="text-danger">*</span> </label>
+                                                                <input type="file" id="csv"
+                                                                    value="{{ old('csv') }}" name="csv"
+                                                                    placeholder="" class="form-control">
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Keluar</button>
+                                                            <button type="submit" class="btn btn-success">Upload</button>
+                                                        </div>
+
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    @endif
+                                    </div>
+                                </div>
                                     </div>
                                 </div>
 
@@ -37,7 +82,6 @@
                                             <th width="1%">No</th>
                                             <th>Puskesmas</th>
                                             <th>Distrik</th>
-                                            <th>Kelurahan</th>
                                             <th>Aksi</th>
                                         </tr>
                                             @forelse ($datas as $data )
@@ -49,15 +93,15 @@
                                                 <td>
                                                     {{$data->distrik->nama_distrik}}
                                                 </td>
-                                                <td>
-                                                    {{$data->kelurahan->nama_kelurahan}}
-                                                </td>
+
                                                 <td>
 
                                                     <a href="{{route('admin.puskesmas.detail',$data->id)}}"
                                                         class="btn btn-sm btn-outline-warning border-0  waves-effect waves-light fs-4">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
+
+                                                    @if(Auth::user()->hasRole('admindinas'))
                                                     <a href="{{route('admin.puskesmas.ubah',$data->id)}}"
                                                         class="btn btn-sm btn-outline-primary border-0 waves-effect waves-light fs-4">
                                                         <i class="fas fa-edit"></i>
@@ -74,6 +118,7 @@
 
                                                         </button>
                                                     </form>
+                                                    @endif
                                                 </td>
 
                                             </tr>

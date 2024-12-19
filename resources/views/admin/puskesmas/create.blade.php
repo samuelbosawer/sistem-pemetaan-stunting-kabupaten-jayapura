@@ -96,9 +96,13 @@ Data Puskesmas
                                                     <div class="col-md-6">
                                                         <a class="btn btn-primary"
                                                             href="{{ route('admin.puskesmas') }}">Kembali</a>
+
+                                                            @if(Auth::user()->hasRole('admindinas'))
                                                         <a class="btn btn-primary"
                                                             href="{{ route('admin.puskesmas.ubah', $data->id) }}">Ubah <i
                                                                 class="fas fa-edit"></i> </a>
+
+                                                            @endif
                                                     </div>
                                                 </div>
                                             @else

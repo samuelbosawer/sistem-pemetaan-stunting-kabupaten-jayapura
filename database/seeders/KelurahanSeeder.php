@@ -167,117 +167,187 @@ class KelurahanSeeder extends Seeder
             'nama_kelurahan' => 'KWANSU',
             'latitude' => '',
             'longitude' =>  '',
-            'distrik_id' =>  '3',
+            'distrik_id' =>  '4',
             'keterangan' =>  ''
         ]);
         $kelurahan = Kelurahan::create([
             'nama_kelurahan' => 'NAMBON',
             'latitude' => '',
             'longitude' =>  '',
-            'distrik_id' =>  '3',
+            'distrik_id' =>  '4',
             'keterangan' =>  ''
         ]);
         $kelurahan = Kelurahan::create([
             'nama_kelurahan' => 'NAMEI',
             'latitude' => '',
             'longitude' =>  '',
-            'distrik_id' =>  '3',
+            'distrik_id' =>  '4',
             'keterangan' =>  ''
         ]);
         $kelurahan = Kelurahan::create([
             'nama_kelurahan' => 'MAMDA',
             'latitude' => '',
             'longitude' =>  '',
-            'distrik_id' =>  '3',
+            'distrik_id' =>  '4',
             'keterangan' =>  ''
         ]);
         $kelurahan = Kelurahan::create([
             'nama_kelurahan' => 'MANDAYAWAN',
             'latitude' => '',
             'longitude' =>  '',
-            'distrik_id' =>  '3',
+            'distrik_id' =>  '4',
             'keterangan' =>  ''
         ]);
         $kelurahan = Kelurahan::create([
             'nama_kelurahan' => 'SAMA',
             'latitude' => '',
             'longitude' =>  '',
-            'distrik_id' =>  '3',
+            'distrik_id' =>  '4',
             'keterangan' =>  ''
         ]);
         $kelurahan = Kelurahan::create([
             'nama_kelurahan' => 'SOAIB',
             'latitude' => '',
             'longitude' =>  '',
-            'distrik_id' =>  '3',
+            'distrik_id' =>  '4',
             'keterangan' =>  ''
         ]);
         $kelurahan = Kelurahan::create([
             'nama_kelurahan' => 'SABEAB KECIL',
             'latitude' => '',
             'longitude' =>  '',
-            'distrik_id' =>  '3',
+            'distrik_id' =>  '4',
             'keterangan' =>  ''
         ]);
         $kelurahan = Kelurahan::create([
             'nama_kelurahan' => 'SEKORI',
             'latitude' => '',
             'longitude' =>  '',
-            'distrik_id' =>  '3',
+            'distrik_id' =>  '4',
             'keterangan' =>  ''
         ]);
         $kelurahan = Kelurahan::create([
             'nama_kelurahan' => 'SKOAIM',
             'latitude' => '',
             'longitude' =>  '',
-            'distrik_id' =>  '3',
+            'distrik_id' =>  '4',
             'keterangan' =>  ''
         ]);
         $kelurahan = Kelurahan::create([
             'nama_kelurahan' => 'AIB',
             'latitude' => '',
             'longitude' =>  '',
-            'distrik_id' =>  '3',
+            'distrik_id' =>  '4',
             'keterangan' =>  ''
         ]);
         $kelurahan = Kelurahan::create([
             'nama_kelurahan' => 'BENGGUIN PROGO',
             'latitude' => '',
             'longitude' =>  '',
-            'distrik_id' =>  '3',
+            'distrik_id' =>  '4',
             'keterangan' =>  ''
         ]);
         $kelurahan = Kelurahan::create([
             'nama_kelurahan' => 'AIMBE',
             'latitude' => '',
             'longitude' =>  '',
-            'distrik_id' =>  '3',
+            'distrik_id' =>  '4',
             'keterangan' =>  ''
         ]);
 
 
     // Kemtuk Gresi
     $kelurahan = Kelurahan::create([
-        'nama_kelurahan' => 'AIMBE',
+        'nama_kelurahan' => 'NEMBUGRESI',
         'latitude' => '',
         'longitude' =>  '',
-        'distrik_id' =>  '3',
+        'distrik_id' =>  '5',
         'keterangan' =>  ''
     ]);
     $kelurahan = Kelurahan::create([
-        'nama_kelurahan' => 'AIMBE',
+        'nama_kelurahan' => 'IBUB',
         'latitude' => '',
         'longitude' =>  '',
-        'distrik_id' =>  '3',
+        'distrik_id' =>  '5',
         'keterangan' =>  ''
     ]);
     $kelurahan = Kelurahan::create([
-        'nama_kelurahan' => 'AIMBE',
+        'nama_kelurahan' => 'HATIB',
         'latitude' => '',
         'longitude' =>  '',
-        'distrik_id' =>  '3',
+        'distrik_id' =>  '5',
         'keterangan' =>  ''
     ]);
+    $kelurahan = Kelurahan::create([
+        'nama_kelurahan' => 'BRING',
+        'latitude' => '',
+        'longitude' =>  '',
+        'distrik_id' =>  '5',
+        'keterangan' =>  ''
+    ]);
+    $kelurahan = Kelurahan::create([
+        'nama_kelurahan' => 'PUPEHABU',
+        'latitude' => '',
+        'longitude' =>  '',
+        'distrik_id' =>  '5',
+        'keterangan' =>  ''
+    ]);
+    $kelurahan = Kelurahan::create([
+        'nama_kelurahan' => 'DAMOI KATI',
+        'latitude' => '',
+        'longitude' =>  '',
+        'distrik_id' =>  '5',
+        'keterangan' =>  ''
+    ]);
+
+    $kelurahan = Kelurahan::create([
+        'nama_kelurahan' => 'DEMETIM',
+        'latitude' => '',
+        'longitude' =>  '',
+        'distrik_id' =>  '5',
+        'keterangan' =>  ''
+    ]);
+
+    $kelurahan = Kelurahan::create([
+        'nama_kelurahan' => 'BRASO',
+        'latitude' => '',
+        'longitude' =>  '',
+        'distrik_id' =>  '5',
+        'keterangan' =>  ''
+    ]);
+
+    $kelurahan = Kelurahan::create([
+        'nama_kelurahan' => 'HYANSIP',
+        'latitude' => '',
+        'longitude' =>  '',
+        'distrik_id' =>  '5',
+        'keterangan' =>  ''
+    ]);
+
+    $kelurahan = Kelurahan::create([
+        'nama_kelurahan' => 'JAGRANG',
+        'latitude' => '',
+        'longitude' =>  '',
+        'distrik_id' =>  '5',
+        'keterangan' =>  ''
+    ]);
+
+    $kelurahan = Kelurahan::create([
+        'nama_kelurahan' => 'SWENTAB',
+        'latitude' => '',
+        'longitude' =>  '',
+        'distrik_id' =>  '5',
+        'keterangan' =>  ''
+    ]);
+
+    $kelurahan = Kelurahan::create([
+        'nama_kelurahan' => 'YANIM',
+        'latitude' => '',
+        'longitude' =>  '',
+        'distrik_id' =>  '5',
+        'keterangan' =>  ''
+    ]);
+
 
 
     }

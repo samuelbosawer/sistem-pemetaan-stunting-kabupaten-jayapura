@@ -64,6 +64,35 @@ class KelurahanController extends Controller
 
     }
 
+
+    public function csv(Request $request)
+    {
+        $request->validate([
+            'csv' => 'required|file|mimes:csv,txt|max:2048',
+        ]);
+
+          // Simpan file sementara
+          $filePath = $request->file('csv')->getRealPath();
+
+          // Baca CSV dan proses data
+          $file = fopen($filePath, 'r');
+          $header = fgetcsv($file); // Ambil header (jika ada)
+
+          // Proses baris data
+          while (($row = fgetcsv($file)) !== false) {
+              Kelurahan::create([
+                  'distrik_id' => $row[2],       // Kolom 1: nama item
+                  'nama_kelurahan' => $row[3],       // Kolom 1: nama item
+                  'latitude' => $row[4],   // Kolom 2: kuantitas
+                  'longitude' => $row[5],      // Kolom 3: harga
+              ]);
+          }
+          fclose($file);
+          alert()->success('Berhasil', 'Upload data berhasil')->autoclose(3000);
+          return redirect()->route('admin.kelurahan');
+    }
+
+
     /**
      * Display the specified resource.
      */

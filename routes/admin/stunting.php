@@ -15,5 +15,8 @@ Route::group(['middleware' => ['role:admindinas']], function () {
         Route::put('stunting/{id}', [StuntingController::class, 'update'])->name('stunting.update')->middleware(['role:admindinas']);
         Route::get('stunting/excel', [StuntingController::class, 'excel'])->name('stunting.excel');
         Route::get('stunting/pdf', [StuntingController::class, 'pdf'])->name('stunting.pdf');
+
+        Route::post('stunting/csv', [StuntingController::class, 'csv'])->name('stunting.csv');
+
     });
 });

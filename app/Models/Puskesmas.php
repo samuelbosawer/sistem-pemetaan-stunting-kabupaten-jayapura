@@ -9,6 +9,12 @@ class Puskesmas extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nama_puskesmas',
+        'distrik_id',
+    ];
+
+
     public function distrik()
     {
         return $this->belongsTo(Distrik::class,'distrik_id', 'id');

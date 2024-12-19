@@ -2,26 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kelurahan;
-use App\Models\Puskesmas;
 use Illuminate\Http\Request;
 
-class PuskesmasController extends Controller
+class FaktorController extends Controller
 {
     public function index(Request $request)
     {
 
-        $datas = Puskesmas::where([
-            ['nama_puskesmas', '!=', Null],
+        $datas = Distrik::where([
+            ['nama_distrik', '!=', Null],
             [function ($query) use ($request) {
                 if (($s = $request->s)) {
-                    $query->orWhere('nama_puskesmas', 'LIKE', '%' . $s . '%')
+                    $query->orWhere('nama_distrik', 'LIKE', '%' . $s . '%')
                         ->orWhere('keterangan', 'LIKE', '%' . $s . '%')
                         ->get();
                 }
             }]
         ])->orderBy('id', 'desc')->paginate(10);
-        return view('admin.puskesmas.index',compact('datas'))->with('i',(request()->input('page', 1) - 1) * 10);
+        return view('admin.distrik.index',compact('datas'))->with('i',(request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -29,8 +27,7 @@ class PuskesmasController extends Controller
      */
     public function create()
     {
-        $kelurahan = Kelurahan::get();
-        return view('admin.puskesmas.create', compact('kelurahan'));
+        return view('admin.distrik.create');
     }
 
     /**
@@ -38,31 +35,25 @@ class PuskesmasController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate(
             [
-                'nama_puskesmas' => 'required',
-                'kelurahan_id' => 'required',
+                'nama_distrik' => 'required',
             ],
             [
-                'nama_puskesmas.required' => 'Tidak boleh kosong',
-                'kelurahan_id.required' => 'Tidak boleh kosong',
+                'nama_distrik.required' => 'Tidak boleh kosong',
             ]
         );
-        $data = new Puskesmas();
+        $data = new Distrik();
 
-        $data->nama_puskesmas   = $request->nama_puskesmas;
-
-        $kel = Kelurahan::find($request->kelurahan_id);
-
-        // dd($kel);
-        $data->distrik_id   = $kel->distrik_id;
-        // $data->kelurahan_id   = $request->kelurahan_id;
+        $data->nama_distrik   = $request->nama_distrik;
+        $data->latitude   = $request->latitude;
+        $data->longitude   = $request->longitude;
         $data->keterangan   = $request->keterangan;
 
         $data->save();
         alert()->success('Berhasil', 'Tambah data berhasil')->autoclose(3000);
-        return redirect()->route('admin.puskesmas');
-
+        return redirect()->route('admin.distrik');
     }
 
 
@@ -81,27 +72,25 @@ class PuskesmasController extends Controller
 
           // Proses baris data
           while (($row = fgetcsv($file)) !== false) {
-              Puskesmas::create([
-                  'distrik_id' => $row[2],       // Kolom 1: nama item
-                  'nama_puskesmas' => $row[3],       // Kolom 1: nama item
+              Distrik::create([
+                  'nama_distrik' => $row[2],       // Kolom 1: nama item
+                  'latitude' => $row[3],   // Kolom 2: kuantitas
+                  'longitude' => $row[4],      // Kolom 3: harga
               ]);
           }
           fclose($file);
           alert()->success('Berhasil', 'Upload data berhasil')->autoclose(3000);
-          return redirect()->route('admin.puskesmas');
+          return redirect()->route('admin.distrik');
     }
-
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        $kelurahan = Kelurahan::get();
-        $data = Puskesmas::where('id',$id)->first();
-        $caption = 'Detail Data Puskesmas';
-
-        return view('admin.puskesmas.create', compact('kelurahan','data','caption'));
+        $data = Distrik::where('id',$id)->first();
+        $caption = 'Detail Data Distrik';
+        return view('admin.distrik.create',compact('data','caption'));
     }
 
     /**
@@ -109,11 +98,9 @@ class PuskesmasController extends Controller
      */
     public function edit(string $id)
     {
-        $kelurahan = Kelurahan::get();
-        $data = Puskesmas::where('id',$id)->first();
-        $caption = 'Ubah Data Puskesmas';
-        return view('admin.puskesmas.create', compact('kelurahan','data','caption'));
-
+        $data = Distrik::where('id',$id)->first();
+        $caption = 'Detail Data Distrik';
+        return view('admin.distrik.create',compact('data','caption'));
     }
 
     /**
@@ -123,28 +110,22 @@ class PuskesmasController extends Controller
     {
         $request->validate(
             [
-                'nama_puskesmas' => 'required',
-                'kelurahan_id' => 'required',
+                'nama_distrik' => 'required',
             ],
             [
-                'nama_puskesmas.required' => 'Tidak boleh kosong',
-                'kelurahan_id.required' => 'Tidak boleh kosong',
+                'nama_distrik.required' => 'Tidak boleh kosong',
             ]
         );
-        $data = Puskesmas::find($id);
+        $data = Distrik::find($id);
 
-        $data->nama_puskesmas   = $request->nama_puskesmas;
-
-        $kel = Kelurahan::find($request->kelurahan_id);
-
-        // dd($kel);
-        $data->distrik_id   = $kel->distrik_id;
-        $data->kelurahan_id   = $request->kelurahan_id;
+        $data->nama_distrik   = $request->nama_distrik;
+        $data->latitude   = $request->latitude;
+        $data->longitude   = $request->longitude;
         $data->keterangan   = $request->keterangan;
 
         $data->update();
         alert()->success('Berhasil', 'Ubah data berhasil')->autoclose(3000);
-        return redirect()->route('admin.puskesmas');
+        return redirect()->route('admin.distrik');
     }
 
     /**
@@ -152,7 +133,7 @@ class PuskesmasController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = Puskesmas::find($id);
+        $data = Distrik::find($id);
         $data->delete();
         return redirect()->back();
     }

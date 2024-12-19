@@ -61,6 +61,33 @@ class StuntingController extends Controller
 
     }
 
+    public function csv(Request $request)
+    {
+        $request->validate([
+            'csv' => 'required|file|mimes:csv,txt|max:2048',
+        ]);
+
+          // Simpan file sementara
+          $filePath = $request->file('csv')->getRealPath();
+
+          // Baca CSV dan proses data
+          $file = fopen($filePath, 'r');
+          $header = fgetcsv($file); // Ambil header (jika ada)
+
+          // Proses baris data
+          while (($row = fgetcsv($file)) !== false) {
+              Stunting::create([
+                  'distrik_id' => $row[1],
+                  'jumlah_balita' => $row[2],
+                  'sangat_pendek' => $row[3],
+                  'pendek' => $row[4],
+              ]);
+          }
+          fclose($file);
+          alert()->success('Berhasil', 'Upload data berhasil')->autoclose(3000);
+          return redirect()->route('admin.stunting');
+    }
+
     /**
      * Display the specified resource.
      */

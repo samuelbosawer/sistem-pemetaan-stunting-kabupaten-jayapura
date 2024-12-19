@@ -9,8 +9,15 @@ class Stunting extends Model
 {
     use HasFactory;
 
-    public function puskesmas()
+    protected $fillable = [
+        'distrik_id',
+        'jumlah_balita',
+        'sangat_pendek',
+        'pendek',
+    ];
+
+    public function distrik()
     {
-        return $this->belongsTo(Puskesmas::class,'puskesmas_id', 'id');
+        return $this->belongsTo(Distrik::class,'distrik_id', 'id');
     }
 }

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('pendek')->nullable();
             $table->string('sangat_pendek')->nullable();
             $table->string('jumlah_balita')->nullable();
-            $table->bigInteger('puskesmas_id')->nullable();
+            // $table->bigInteger('puskesmas_id')->nullable();
+            $table->bigInteger('distrik_id')->nullable();
 
             $table->timestamps();
         });

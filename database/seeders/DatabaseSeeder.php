@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(DistrikSeeder::class);
-        $this->call(KelurahanSeeder::class);
-        $this->call(PuskesmasSeeder::class);
-        $this->call(StuntingSeeder::class);
-        $this->call(FaktorSeeder::class);
+        // $this->call(DistrikSeeder::class);
+        // $this->call(KelurahanSeeder::class);
+        // $this->call(PuskesmasSeeder::class);
+        // $this->call(StuntingSeeder::class);
+        // $this->call(FaktorSeeder::class);
 
     }
 }
