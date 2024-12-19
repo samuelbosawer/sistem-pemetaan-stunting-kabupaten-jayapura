@@ -96,7 +96,6 @@
 
 
 
-
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label for="role"> Role <span class="text-danger">*</span>
@@ -104,8 +103,8 @@
                                                         <select name="role" id="" class="form-control"
                                                             @if (Request::segment(3) == 'detail') disabled @endif>
                                                             <option value="" hidden> Pilih Role </option>
-
                                                             @foreach ($roles as $r)
+
                                                                 @if ($r->id == old('role'))
                                                                     <option selected value="{{ $r->name }}">
                                                                         {{ $r->name }}  </option>

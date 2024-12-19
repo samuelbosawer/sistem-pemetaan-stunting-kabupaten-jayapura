@@ -42,7 +42,7 @@
 
                     <li>
                         <a href="{{route('admin.stunting')}}">
-                            <i data-feather="home"></i>
+                            <i data-feather="slack"></i>
                             <span> Data Stunting </span>
                         </a>
                     </li>
