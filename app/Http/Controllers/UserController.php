@@ -2,14 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
     public function index(Request $request)
     {
 
-        return 'user/index';
+        $datas = User::where([
+            ['name', '!=', Null],
+            [function ($query) use ($request) {
+                if (($s = $request->s)) {
+                    $query->orWhere('name', 'LIKE', '%' . $s . '%')
+                        ->orWhere('email', 'LIKE', '%' . $s . '%')
+                        ->get();
+                }
+            }]
+        ])->orderBy('id', 'desc')->paginate(10);
+        return view('admin.user.index',compact('datas'))->with('i',(request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -17,7 +29,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return 'user/create';
+        $roles = Role::get();
+       return  view('admin.user.create',compact('roles'));
     }
 
     /**
@@ -25,7 +38,33 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return 'user/store';
+        $request->validate(
+            [
+                // 'phone' => 'required|unique:users,phone|max:13',
+                'email' => 'required|unique:users,email|string',
+                // 'date_of_birth' => 'required',
+                'name' => 'required',
+                'password'  => 'required|confirmed|min:8',
+                'password_confirmation' => 'required_with:password|same:password|min:8'
+            ],
+            [
+                'email.required' => 'Tidak boleh kosong',
+                'email.unique' => 'Email sudah terdaftar',
+                'name.required' => 'Tidak boleh kosong',
+                'password.required' => 'Tidak boleh kosong',
+                'password.confirmed' => 'Password tidak sama',
+            ]
+        );
+        $data = new User();
+
+        $data->email   = $request->email;
+        $data->password   = $request->password;
+        $data->name   = $request->name;
+        $data->assignRole($request->role);
+
+        $data->save();
+        alert()->success('Berhasil', 'Tambah data berhasil')->autoclose(3000);
+        return redirect()->route('admin.user');
     }
 
     /**
@@ -33,7 +72,10 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        return 'user/show';
+        $data = User::where('id',$id)->first();
+        $roles = Role::get();
+        $caption = 'Detail Data Puskesmas';
+        return view('admin.user.create', compact('roles','data','caption'));
 
     }
 
@@ -42,7 +84,10 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        return 'user/edit';
+        $data = User::where('id',$id)->first();
+        $roles = Role::get();
+        $caption = 'Ubah Data Pengguna';
+        return view('admin.user.create', compact('roles','data','caption'));
     }
 
     /**
@@ -50,7 +95,27 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return 'user/update';
+        $request->validate(
+            [
+                'name' => 'required',
+                'password'  => 'required|confirmed|min:8',
+                'password_confirmation' => 'required_with:password|same:password|min:8'
+            ],
+            [
+                'name.required' => 'Tidak boleh kosong',
+                'password.required' => 'Tidak boleh kosong',
+                'password.confirmed' => 'Password tidak sama',
+            ]
+        );
+        $data = User::find($id);
+
+        $data->password   = $request->password;
+        $data->name   = $request->name;
+        $data->assignRole($request->role);
+
+        $data->update();
+        alert()->success('Berhasil', 'Ubah data berhasil')->autoclose(3000);
+        return redirect()->route('admin.user');
     }
 
     /**
@@ -58,7 +123,9 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        return 'user/destroy';
+        $data = User::find($id);
+        $data->delete();
+        return redirect()->back();
     }
 
 
