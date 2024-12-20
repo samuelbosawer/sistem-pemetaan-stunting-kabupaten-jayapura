@@ -100,7 +100,7 @@ class DistrikController extends Controller
     public function edit(string $id)
     {
         $data = Distrik::where('id',$id)->first();
-        $caption = 'Detail Data Distrik';
+        $caption = 'Ubah Data Distrik';
         return view('admin.distrik.create',compact('data','caption'));
     }
 

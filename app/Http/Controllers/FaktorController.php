@@ -3,23 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Faktor;
 
 class FaktorController extends Controller
 {
     public function index(Request $request)
     {
 
-        $datas = Distrik::where([
-            ['nama_distrik', '!=', Null],
+        $datas = Faktor::where([
+            ['faktor', '!=', Null],
             [function ($query) use ($request) {
                 if (($s = $request->s)) {
-                    $query->orWhere('nama_distrik', 'LIKE', '%' . $s . '%')
+                    $query->orWhere('faktor', 'LIKE', '%' . $s . '%')
                         ->orWhere('keterangan', 'LIKE', '%' . $s . '%')
                         ->get();
                 }
             }]
         ])->orderBy('id', 'desc')->paginate(10);
-        return view('admin.distrik.index',compact('datas'))->with('i',(request()->input('page', 1) - 1) * 10);
+        return view('admin.faktor.index',compact('datas'))->with('i',(request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -27,7 +28,7 @@ class FaktorController extends Controller
      */
     public function create()
     {
-        return view('admin.distrik.create');
+        return view('admin.faktor.create');
     }
 
     /**
@@ -38,22 +39,20 @@ class FaktorController extends Controller
 
         $request->validate(
             [
-                'nama_distrik' => 'required',
+                'faktor' => 'required',
             ],
             [
-                'nama_distrik.required' => 'Tidak boleh kosong',
+                'faktor.required' => 'Tidak boleh kosong',
             ]
         );
-        $data = new Distrik();
+        $data = new Faktor();
 
-        $data->nama_distrik   = $request->nama_distrik;
-        $data->latitude   = $request->latitude;
-        $data->longitude   = $request->longitude;
+        $data->faktor   = $request->faktor;
         $data->keterangan   = $request->keterangan;
 
         $data->save();
         alert()->success('Berhasil', 'Tambah data berhasil')->autoclose(3000);
-        return redirect()->route('admin.distrik');
+        return redirect()->route('admin.faktor');
     }
 
 
@@ -88,9 +87,9 @@ class FaktorController extends Controller
      */
     public function show(string $id)
     {
-        $data = Distrik::where('id',$id)->first();
+        $data = Faktor::where('id',$id)->first();
         $caption = 'Detail Data Distrik';
-        return view('admin.distrik.create',compact('data','caption'));
+        return view('admin.faktor.create',compact('data','caption'));
     }
 
     /**
@@ -98,9 +97,9 @@ class FaktorController extends Controller
      */
     public function edit(string $id)
     {
-        $data = Distrik::where('id',$id)->first();
-        $caption = 'Detail Data Distrik';
-        return view('admin.distrik.create',compact('data','caption'));
+        $data = Faktor::where('id',$id)->first();
+        $caption = 'Ubah Data Distrik';
+        return view('admin.faktor.create',compact('data','caption'));
     }
 
     /**
@@ -110,22 +109,20 @@ class FaktorController extends Controller
     {
         $request->validate(
             [
-                'nama_distrik' => 'required',
+                'faktor' => 'required',
             ],
             [
-                'nama_distrik.required' => 'Tidak boleh kosong',
+                'faktor.required' => 'Tidak boleh kosong',
             ]
         );
-        $data = Distrik::find($id);
+        $data = Faktor::find($id);
 
-        $data->nama_distrik   = $request->nama_distrik;
-        $data->latitude   = $request->latitude;
-        $data->longitude   = $request->longitude;
+        $data->faktor   = $request->faktor;
         $data->keterangan   = $request->keterangan;
 
         $data->update();
         alert()->success('Berhasil', 'Ubah data berhasil')->autoclose(3000);
-        return redirect()->route('admin.distrik');
+        return redirect()->route('admin.faktor');
     }
 
     /**
@@ -133,7 +130,7 @@ class FaktorController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = Distrik::find($id);
+        $data = Faktor::find($id);
         $data->delete();
         return redirect()->back();
     }

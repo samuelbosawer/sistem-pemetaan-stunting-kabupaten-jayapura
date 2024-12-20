@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(KelurahanSeeder::class);
         // $this->call(PuskesmasSeeder::class);
         // $this->call(StuntingSeeder::class);
-        // $this->call(FaktorSeeder::class);
+        $this->call(FaktorSeeder::class);
 
     }
 }
