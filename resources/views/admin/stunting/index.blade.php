@@ -84,7 +84,7 @@
                                             <tr>
                                                 <td>{{ ++$i}}</td>
                                                 <td>
-                                                    {{$data->distrik->nama_distrik}}
+                                                    {{$data->distrik->nama_distrik ?? ''}}
                                                 </td>
                                                 <td>
                                                     {{$data->jumlah_balita}}

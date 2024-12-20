@@ -39,22 +39,22 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
 
-                                                        <label for="latitude"> Puskesmas <span class="text-danger">*</span>
+                                                        <label for="latitude"> Distrik <span class="text-danger">*</span>
                                                         </label>
                                                         <select class="form-control" aria-label="Default select example"
-                                                            name="puskesmas_id"
+                                                            name="distrik_id"
                                                             @if (Request::segment(3) == 'detail') {{ 'disabled' }} @endif>
-                                                            <option value="">Pilih Puskesmas</option>
-                                                            @foreach ($puskesmas as $k)
-                                                                <option @if ($k->id == ($data->puskesmas_id ?? '')) selected @endif
+                                                            <option value="">Pilih Distrik</option>
+                                                            @foreach ($distrik as $k)
+                                                                <option @if ($k->id == ($data->distrik_id ?? '')) selected @endif
                                                                     value="{{ $k->id }}">
-                                                                    {{ $k->nama_puskesmas }}
+                                                                    {{ $k->nama_distrik }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        @if ($errors->has('puskesmas_id'))
+                                                        @if ($errors->has('distrik_id'))
                                                             <label class="text-danger">
-                                                                {{ $errors->first('puskesmas_id') }}
+                                                                {{ $errors->first('distrik_id') }}
                                                             </label>
                                                         @endif
                                                     </div>

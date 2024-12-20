@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Distrik;
 use App\Models\Puskesmas;
 use App\Models\Stunting;
 use Illuminate\Http\Request;
@@ -29,8 +30,8 @@ class StuntingController extends Controller
      */
     public function create()
     {
-        $puskesmas = Puskesmas::get();
-        return view('admin.stunting.create', compact('puskesmas'));
+        $distrik = Distrik::get();
+        return view('admin.stunting.create', compact('distrik'));
     }
 
     /**
@@ -41,16 +42,16 @@ class StuntingController extends Controller
 
         $request->validate(
             [
-                'puskesmas_id' => 'required',
+                'distrik_id' => 'required',
 
             ],
             [
-                'puskesmas_id.required' => 'Tidak boleh kosong',
+                'distrik_id.required' => 'Tidak boleh kosong',
             ]
         );
         $data = new Stunting();
 
-        $data->puskesmas_id   = $request->puskesmas_id;
+        $data->distrik_id   = $request->distrik_id;
         $data->pendek   = $request->pendek;
         $data->sangat_pendek   = $request->sangat_pendek;
         $data->jumlah_balita   = $request->jumlah_balita;
@@ -116,16 +117,17 @@ class StuntingController extends Controller
     {
         $request->validate(
             [
-                'puskesmas_id' => 'required',
+                'distrik_id' => 'required',
 
             ],
             [
-                'puskesmas_id.required' => 'Tidak boleh kosong',
+                'distrik_id.required' => 'Tidak boleh kosong',
             ]
         );
         $data = Stunting::find($id);
 
-        $data->puskesmas_id   = $request->puskesmas_id;
+        $data->distrik_id   = $request->distrik_id;
+
         $data->pendek   = $request->pendek;
         $data->sangat_pendek   = $request->sangat_pendek;
         $data->jumlah_balita   = $request->jumlah_balita;
