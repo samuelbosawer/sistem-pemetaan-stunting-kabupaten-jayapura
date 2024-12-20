@@ -20,4 +20,5 @@ class Stunting extends Model
     {
         return $this->belongsTo(Distrik::class,'distrik_id', 'id');
     }
+
 }

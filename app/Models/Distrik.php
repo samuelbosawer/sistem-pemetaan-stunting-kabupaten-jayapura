@@ -19,4 +19,14 @@ class Distrik extends Model
     {
         return $this->belongsToMany(Kelurahan::class,'kelurahan_id', 'id');
     }
+
+    public function puskesmas()
+    {
+        return $this->belongsToMany(Kelurahan::class,'puskemas_id', 'id');
+    }
+
+    public function stunting()
+    {
+        return $this->hasMany(Stunting::class, 'distrik_id', 'id');
+    }
 }

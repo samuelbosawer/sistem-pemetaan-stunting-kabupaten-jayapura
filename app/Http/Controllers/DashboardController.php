@@ -25,7 +25,10 @@ class DashboardController extends Controller
         $stunting = Stunting::get()->count();
         $pengguna = User::get()->count();
 
-        return view('admin.dashboard.index', compact('distrik','kelurahan','puskesmas','stunting','pengguna'));
+        $pus = Puskesmas::with('distrik.stunting')->get();
+
+
+        return view('admin.dashboard.index', compact('distrik','kelurahan','puskesmas','stunting','pengguna','pus'));
     }
 
 

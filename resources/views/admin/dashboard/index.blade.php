@@ -174,8 +174,39 @@
                 pane: 'labels'
             }).addTo(map);
 
+            @foreach ($pus as $p)
+    var marker = L.marker([{{$p->distrik->latitude}}, {{$p->distrik->longitude}}],
+    {alt: 'STUNTING'}).addTo(map).bindPopup(`DISTRIK {{$p->distrik->nama_distrik}} <br>
+    PUSKESMAS {{$p->nama_puskesmas}} <br>
+
+    <p class=""> Jumlah Balita  :
+        <span class="font-weight-bold">
+            @php
+                // Hitung total jumlah balita dari seluruh data stunting di distrik ini
+                $jumlahBalita = $p->distrik->stunting->sum('jumlah_balita');
+            @endphp
+            {{$jumlahBalita}}
+        </span>
+    </p>
+
+    <p>Balita Pendek  :
+        <span class="font-weight-bold">
+            {{$p->distrik->stunting->sum('pendek')}}
+        </span>
+    </p>
+
+      <p>Balita Sangat Pendek  :
+        <span class="font-weight-bold">
+            {{$p->distrik->stunting->sum('sangat_pendek')}}
+        </span>
+    </p>
+    `);
+@endforeach
+
+
+
             // Adjusted the map view to focus on Papua, Indonesia
-            map.setView({lat:  -3.0354622, lng: 138.7181155}, 9); // Papua, Indonesia coordinates
+            map.setView({lat:  -2.5677583, lng: 140.435791}, 9); // Papua, Indonesia coordinates
 
             </script>
     @endsection
