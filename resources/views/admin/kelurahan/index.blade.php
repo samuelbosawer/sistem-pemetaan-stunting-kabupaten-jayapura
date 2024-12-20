@@ -87,7 +87,7 @@
                                                     {{$data->nama_kelurahan}}
                                                 </td>
                                                 <td>
-                                                    {{$data->distrik->nama_distrik}}
+                                                    {{$data->distrik->nama_distrik ?? ''}}
                                                 </td>
                                                 <td>
                                                     {{$data->latitude}}
