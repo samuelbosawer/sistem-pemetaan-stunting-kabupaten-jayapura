@@ -1,353 +1,683 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Sistem Informasi Pemuda Baptis Papua</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Roboto&display=swap" rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="asset-visitor/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="asset-visitor/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+  <title>SIPENTING</title>
 
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="asset-visitor/css/bootstrap.min.css" rel="stylesheet">
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="/assets-visitor/css/bootstrap.css" />
 
-    <!-- Template Stylesheet -->
-    <link href="asset-visitor/css/style.css" rel="stylesheet">
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+
+  <!-- font awesome style -->
+  <link href="/assets-visitor/css/font-awesome.min.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="/assets-visitor/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="/assets-visitor/css/responsive.css" rel="stylesheet" />
+
 </head>
 
 <body>
 
-    <!-- Spinner Start -->
-    <div id="spinner"
-        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <!-- Spinner End -->
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section long_section px-0">
+      <nav class="navbar navbar-expand-lg custom_nav-container ">
+        <a class="navbar-brand" href="{{route('home')}}">
+          <span>
+            SIPENTING
+          </span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class=""> </span>
+        </button>
 
-    <!-- Topbar Start -->
-    <div class="container-fluid bg-primary px-5 d-none d-lg-block" id="top">
-        <div class="row gx-0">
-            <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
-                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="#"><i
-                            class="fab fa-twitter fw-normal"></i></a>
-                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="#"><i
-                            class="fab fa-facebook-f fw-normal"></i></a>
-                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="#"><i
-                            class="fab fa-linkedin-in fw-normal"></i></a>
-                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="#"><i
-                            class="fab fa-instagram fw-normal"></i></a>
-                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href=""><i
-                            class="fab fa-youtube fw-normal"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-4 text-center text-lg-end">
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
+            <ul class="navbar-nav  ">
+              <li class="nav-item active">
+                <a class="nav-link" href="#beranda">Beranda </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#stunting">Stunting</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#peta">Peta Pemetaan</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Kontak</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html"> Tentang Kami</a>
+              </li>
 
-                    @if (Auth::guest())
-                        <a href="{{ route('login') }}"><small class="me-3 text-light"><i
-                                    class="fa fa-sign-in-alt me-2"></i>Login</small></a>
-                    @else
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><small class="me-3 text-light"><i
-                                    class="fa fa-sign-out-alt me-2"></i>Logout</small></a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    @endif
+            </ul>
+          </div>
+          <div class="quote_btn-container">
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Topbar End -->
+            @if (Auth::User()->HasRole('admindinas|adminpuskesmas|kepaladinas'))
 
-    <!-- Navbar & Hero Start -->
-    <div class="container-fluid position-relative p-0">
-        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-            <a href="" class="navbar-brand p-0">
-                <div class="d-flex m-0 text-white mt-3">
-                    <div class="d-flex align-items-center"> <img src="{{ asset('assets/images/logo.png') }}"srcset="">
-                    </div>
-                    <h1 class=" fw-bold h5 "> SI Pemuda Baptis Papua  <br >Tingkat Wilayah  Jayapura, <br> Keerom
-                        dan Yahukimo</h1>
-                </div>
-                <h2 class="">
-                </h2>
-                <!-- <img src="asset-visitor/img/logo.png" alt="Logo"> -->
+            <a class="btn btn-success text-white fw-bold" href="{{route('admin.dashboard')}}">
+                <span>
+                  Dasbor
+                </span>
+                <i class="fa fa-desktop" aria-hidden="true"></i>
+              </a>
+
+
+
+            @else
+            <a href="{{route('login')}}">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <i class="fa fa-external-link" aria-hidden="true"></i>
+                <span>
+                Masuk
+              </span>
+
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="fa fa-bars"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
-                    <a href="#beranda" class="nav-item nav-link ">Beranda</a>
-                    <a href="#tentang" class="nav-item nav-link">Tentang Kami</a>
-                    <a href="#pengumuman" class="nav-item nav-link">Pengumuman</a>
-                    <a href="#agenda" class="nav-item nav-link">Agenda</a>
-                    <a href="#galeri" class="nav-item nav-link">Galeri</a>
+
+            @endif
+
+            {{-- <form class="form-inline">
+              <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </form> --}}
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- end header section -->
+    <!-- slider section -->
+    {{-- <section class="slider_section long_section"> --}}
+    <section class="slider_section " id="beranda">
+      <div id="customCarousel" class="carousel slide" data-ride="carousel">
+
+
+
+
+
+        <div class="carousel-inner">
+            <div class="carousel-item ">
+              <div class="container ">
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="detail-box">
+                      <h1>
+                        SIPENTING <br>
+                        {{-- Furniture Needs --}}
+                      </h1>
+                      <p>
+                          Sistem Pemetaan Stunting di Kabupaten Jayapura adalah platform yang memetakan dan menganalisis data stunting berbasis web untuk mendukung pengambilan keputusan dan penanganan tepat sasaran.
+                      </p>
+                      <div class="btn-box">
+                        <a href="#kontak" class="btn1">
+                         Kontak
+                        </a>
+                        <a href="#tentang" class="btn btn-success">
+                        Tentang Kami
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="img-box">
+                      <img src="/assets-visitor/images/slider-img-1.png" alt="">
+                    </div>
+                  </div>
                 </div>
-                {{-- <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Book Now</a> --}}
+              </div>
             </div>
-        </nav>
-
-        <!-- Carousel Start -->
-        <div class="carousel-header" id="beranda">
-            <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active"></li>
-                    <li data-bs-target="#carouselId" data-bs-slide-to="1"></li>
-                    <li data-bs-target="#carouselId" data-bs-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item active">
-                        <img src="asset-visitor/img/carousel-2.jpg" class="img-fluid" alt="Image">
-                        <div class="carousel-caption">
-                            <div class="p-3" style="max-width: 900px;">
-                                <h5 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">
-                                    Sistem Informasi Pemuda Baptis Papua</h5>
-                                <h1 class="h5 text-capitalize text-white mb-4">Tingkat Wilayah Jayapura, Keerom
-                                    dan Yahukimo
 
 
-                            </div>
+            <div class="carousel-item ">
+                <div class="container ">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="detail-box">
+                        <h1>
+                          SIPENTING <br>
+                          {{-- Furniture Needs --}}
+                        </h1>
+                        <p>
+                            Sistem Pemetaan Stunting di Kabupaten Jayapura adalah platform yang memetakan dan menganalisis data stunting berbasis web untuk mendukung pengambilan keputusan dan penanganan tepat sasaran.
+                        </p>
+                        <div class="btn-box">
+                          <a href="#kontak" class="btn1">
+                           Kontak
+                          </a>
+                          <a href="#tentang" class="btn btn-success">
+                          Tentang Kami
+                          </a>
                         </div>
+                      </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="asset-visitor/img/carousel-1.jpg" class="img-fluid" alt="Image">
-                        <div class="carousel-caption">
-                            <div class="p-3" style="max-width: 900px;">
-                                <h5 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">
-                                    Sistem Informasi Pemuda Baptis Papua</h5>
-                                <h1 class="h5 text-capitalize text-white mb-4">Tingkat Wilayah Jayapura, Keerom
-                                    dan Yahukimo
-                            </div>
-                        </div>
+                    <div class="col-md-7">
+                      <div class="img-box">
+                        <img src="/assets-visitor/images/slider-img-2.png" alt="">
+                      </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="asset-visitor/img/carousel-3.jpg" class="img-fluid" alt="Image">
-                        <div class="carousel-caption">
-                            <div class="p-3" style="max-width: 900px;">
-                                <h5 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">
-                                    Sistem Informasi Pemuda Baptis Papua</h5>
-                                <h1 class="h5 text-capitalize text-white mb-4">Tingkat Wilayah Jayapura, Keerom
-                                    dan Yahukimo
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselId"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon btn bg-primary" aria-hidden="false"></span>
-                    <span class="visually-hidden">Previous</span>
+            </div>
+
+
+            <div class="carousel-item active ">
+                <div class="container ">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="detail-box">
+                        <h1>
+                          SIPENTING <br>
+                          {{-- Furniture Needs --}}
+                        </h1>
+                        <p>
+                            Sistem Pemetaan Stunting di Kabupaten Jayapura adalah platform yang memetakan dan menganalisis data stunting berbasis web untuk mendukung pengambilan keputusan dan penanganan tepat sasaran.
+                        </p>
+                        <div class="btn-box">
+                          <a href="#kontak" class="btn1">
+                           Kontak
+                          </a>
+                          <a href="#tentang" class="btn btn-success">
+                          Tentang Kami
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-7">
+                      <div class="img-box">
+                        <img src="/assets-visitor/images/slider-img-3.png" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+          </div>
+
+
+
+
+        <ol class="carousel-indicators">
+          <li data-target="#customCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#customCarousel" data-slide-to="1"></li>
+          <li data-target="#customCarousel" data-slide-to="2"></li>
+        </ol>
+      </div>
+    </section>
+    <!-- end slider section -->
+  </div>
+
+  <!-- furniture section -->
+
+  <section class="furniture_section layout_padding" id="stunting">
+    <div class="container" >
+      <div class="heading_container">
+        <h2>
+
+Stunting di Kabupaten Jayapura
+        </h2>
+        <p>
+            Masalah stunting masih menjadi tantangan di Kabupaten Jayapura, dipengaruhi oleh gizi buruk, sanitasi, dan akses kesehatan. Upaya kolaboratif terus dilakukan untuk mengatasi dampaknya demi generasi yang sehat dan produktif.
+        </p>
+      </div>
+      <div class="row">
+
+
+        <div class="col-md-12 col-lg-12">
+          <div class="">
+
+
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="">
+                        <div class="">
+                            <div class="row mt-3 d-flex justify-content-between">
+                                <div class="col-8">
+                                    @include('admin.layout.search')
+                                </div>
+
+
+
+                                </div>
+                            </div>
+
+                            <div class="mt-3 table-responsive">
+                                <table class="table table-bordered">
+                                    <tr class="bg-success text-white">
+                                        <th width="1%">No</th>
+                                        <th>Distrik</th>
+                                        <th>Jumlah Balita</th>
+                                        <th>Pendek</th>
+                                        <th>Sangat Pendek</th>
+                                    </tr>
+                                        @forelse ($datas as $data )
+                                        <tr>
+                                            <td>{{ ++$i}}</td>
+                                            <td>
+                                                {{$data->distrik->nama_distrik ?? ''}}
+                                            </td>
+                                            <td>
+                                                {{$data->jumlah_balita}}
+                                            </td>
+                                            <td>
+                                                {{$data->pendek}}
+                                            </td>
+                                            <td>
+                                                {{$data->sangat_pendek}}
+                                            </td>
+
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <td colspan="7">
+                                                No data . . .
+                                            </td>
+                                        </tr>
+                                        @endforelse
+
+
+                                </table>
+                            </div>
+                            <!-- end .mt-4 -->
+                            {!! $datas->links() !!}
+
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+            </div>
+            {{-- end row --}}
+          </div>
+        </div>
+
+
+    </div>
+  </section>
+
+  <!-- end furniture section -->
+
+
+  <!-- about section -->
+
+  <section class="about_section layout_padding ">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+              Peta Pemetaan
+              </h2>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti dolorem eum consequuntur ipsam repellat dolor soluta aliquid laborum, eius odit consectetur vel quasi in quidem, eveniet ab est corporis tempore.
+            </p>
+            <a href="">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end about section -->
+
+  <!-- blog section -->
+
+  <section class="blog_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Latest Blog
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-4 mx-auto">
+          <div class="box">
+            <div class="img-box">
+              <img src="/assets-visitor/images/b1.jpg" alt="">
+            </div>
+            <div class="detail-box">
+              <h5>
+                Look even slightly believable. If you are
+              </h5>
+              <p>
+                alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+              </p>
+              <a href="">
+                Read More
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mx-auto">
+          <div class="box">
+            <div class="img-box">
+              <img src="/assets-visitor/images/b2.jpg" alt="">
+            </div>
+            <div class="detail-box">
+              <h5>
+                Anything embarrassing hidden in the middle
+              </h5>
+              <p>
+                alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+              </p>
+              <a href="">
+                Read More
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mx-auto">
+          <div class="box">
+            <div class="img-box">
+              <img src="/assets-visitor/images/b3.jpg" alt="">
+            </div>
+            <div class="detail-box">
+              <h5>
+                Molestias magni natus dolores odio commodi. Quaerat!
+              </h5>
+              <p>
+                alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+              </p>
+              <a href="">
+                Read More
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end blog section -->
+
+  <!-- client section -->
+
+  <section class="client_section layout_padding-bottom">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Testimonial
+        </h2>
+      </div>
+      <div id="carouselExample2Controls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row">
+              <div class="col-md-11 col-lg-10 mx-auto">
+                <div class="box">
+                  <div class="img-box">
+                    <img src="/assets-visitor/images/client.jpg" alt="" />
+                  </div>
+                  <div class="detail-box">
+                    <div class="name">
+                      <i class="fa fa-quote-left" aria-hidden="true"></i>
+                      <h6>
+                        Siaalya
+                      </h6>
+                    </div>
+                    <p>
+                      It is a long established fact that a reader will be
+                      distracted by the readable cIt is a long established fact
+                      that a reader will be distracted by the readable c
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-md-11 col-lg-10 mx-auto">
+                <div class="box">
+                  <div class="img-box">
+                    <img src="/assets-visitor/images/client.jpg" alt="" />
+                  </div>
+                  <div class="detail-box">
+                    <div class="name">
+                      <i class="fa fa-quote-left" aria-hidden="true"></i>
+                      <h6>
+                        Siaalya
+                      </h6>
+                    </div>
+                    <p>
+                      It is a long established fact that a reader will be
+                      distracted by the readable cIt is a long established fact
+                      that a reader will be distracted by the readable c
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-md-11 col-lg-10 mx-auto">
+                <div class="box">
+                  <div class="img-box">
+                    <img src="/assets-visitor/images/client.jpg" alt="" />
+                  </div>
+                  <div class="detail-box">
+                    <div class="name">
+                      <i class="fa fa-quote-left" aria-hidden="true"></i>
+                      <h6>
+                        Siaalya
+                      </h6>
+                    </div>
+                    <p>
+                      It is a long established fact that a reader will be
+                      distracted by the readable cIt is a long established fact
+                      that a reader will be distracted by the readable c
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel_btn-container">
+          <a class="carousel-control-prev" href="#carouselExample2Controls" role="button" data-slide="prev">
+            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExample2Controls" role="button" data-slide="next">
+            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end client section -->
+
+  <!-- contact section -->
+  <section class="contact_section  long_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form_container">
+            <div class="heading_container">
+              <h2>
+                Contact Us
+              </h2>
+            </div>
+            <form action="">
+              <div>
+                <input type="text" placeholder="Your Name" />
+              </div>
+              <div>
+                <input type="text" placeholder="Phone Number" />
+              </div>
+              <div>
+                <input type="email" placeholder="Email" />
+              </div>
+              <div>
+                <input type="text" class="message-box" placeholder="Message" />
+              </div>
+              <div class="btn_box">
+                <button>
+                  SEND
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselId"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon btn bg-primary" aria-hidden="false"></span>
-                    <span class="visually-hidden">Next</span>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="map_container">
+            <div class="map">
+              <div id="googleMap"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end contact section -->
+
+  <!-- info section -->
+  <section class="info_section long_section">
+
+    <div class="container">
+      <div class="contact_nav">
+        <a href="">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          <span>
+            Call : +01 123455678990
+          </span>
+        </a>
+        <a href="">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+          <span>
+            Email : demo@gmail.com
+          </span>
+        </a>
+        <a href="">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          <span>
+            Location
+          </span>
+        </a>
+      </div>
+
+      <div class="info_top ">
+        <div class="row ">
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="info_links">
+              <h4>
+                QUICK LINKS
+              </h4>
+              <div class="info_links_menu">
+                <a class="" href="index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="" href="about.html"> About</a>
+                <a class="" href="furniture.html">Furniture</a>
+                <a class="" href="blog.html">Blog</a>
+                <a class="" href="contact.html">Contact Us</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 mx-auto">
+            <div class="info_post">
+              <h5>
+                INSTAGRAM FEEDS
+              </h5>
+              <div class="post_box">
+                <div class="img-box">
+                  <img src="/assets-visitor/images/f1.png" alt="">
+                </div>
+                <div class="img-box">
+                  <img src="/assets-visitor/images/f2.png" alt="">
+                </div>
+                <div class="img-box">
+                  <img src="/assets-visitor/images/f3.png" alt="">
+                </div>
+                <div class="img-box">
+                  <img src="/assets-visitor/images/f4.png" alt="">
+                </div>
+                <div class="img-box">
+                  <img src="/assets-visitor/images/f5.png" alt="">
+                </div>
+                <div class="img-box">
+                  <img src="/assets-visitor/images/f6.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="info_form">
+              <h4>
+                SIGN UP TO OUR NEWSLETTER
+              </h4>
+              <form action="">
+                <input type="text" placeholder="Enter Your Email" />
+                <button type="submit">
+                  Subscribe
                 </button>
+              </form>
+              <div class="social_box">
+                <a href="">
+                  <i class="fa fa-facebook" aria-hidden="true"></i>
+                </a>
+                <a href="">
+                  <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+                <a href="">
+                  <i class="fa fa-linkedin" aria-hidden="true"></i>
+                </a>
+                <a href="">
+                  <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+              </div>
             </div>
+          </div>
         </div>
-        <!-- Carousel End -->
+      </div>
     </div>
+  </section>
+  <!-- end info_section -->
 
 
-    <!-- About Start -->
-    <div class="container-fluid about py-5" id="tentang">
-        <div class="container py-5">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-5">
-                    <div class="h-100"
-                        style="border: 50px solid; border-color: transparent #13357B transparent #13357B;">
-                        <img src="asset-visitor/img/about-img.jpg" class="img-fluid w-100 h-100" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-7">
-                    <h5 class="section-about-title pe-3">Tentang Kami</h5>
-                    <h1 class="mb-4">Welcome to <span class="text-primary">SI Pemuda Baptis Papua</span></h1>
-                    <p class="mb-4 bg-primary p-3 rounded text-white">Sistem Informasi Pemuda Baptis Papua Tingkat
-                        Wilayah Jayapura, Keerom, dan Yahukimo adalah sebuah platform digital yang dirancang untuk
-                        mendukung pengelolaan data dan aktivitas Pemuda Baptis di tiga wilayah tersebut. Sistem ini
-                        bertujuan untuk memudahkan pemantauan kegiatan, komunikasi, serta administrasi organisasi pemuda
-                        gereja dengan lebih efisien. </p>
-                </div>
-            </div>
-        </div>
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        <a href="https://html.design/">Free Html Templates</a>
+        Distribution <a href="https://themewagon.com">ThemeWagon</a>
+      </p>
     </div>
-    <!-- About End -->
-
-    <!-- Pengumuman Start -->
-    <div class="container-fluid bg-light service py-5" id="pengumuman">
-        <div class="container py-5">
-            <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-                <h5 class="section-title px-3">Pengumuman</h5>
-                <h1 class="mb-0">Informasi Pengumuman terbaru pada setiap kegiatan Pemuda Baptis Papua</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-12">
-                    <div class="row g-4">
-                        @foreach ($pengumuman as $p)
-                            <div class="col-6">
-                                <div class="service-content-inner  bg-white border border-primary rounded p-4 pe-0">
-                                    <div class="service-content text-center">
-                                        <h5 class="mb-4">{{ $p->judul }}</h5>
-                                        <p class="mb-0">{{ $p->keterangan }}
-                                        </p>
-                                    </div>
-                                    <div class="text-small text-muted text-center mt-3 fw-bold service-content">
-                                        <p> {{ strftime('%d %B %Y', strtotime($p->mulai)) . ' - ' . strftime('%d %B %Y', strtotime($p->selesai)) }}
-                                        </p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        @endforeach
+  </footer>
+  <!-- footer section -->
 
 
-                    </div>
-                </div>
+  <!-- jQery -->
+  <script src="/assets-visitor/js/jquery-3.4.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="/assets-visitor/js/bootstrap.js"></script>
+  <!-- custom js -->
+  <script src="/assets-visitor/js/custom.js"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+  <!-- End Google Map -->
 
-            </div>
-        </div>
-    </div>
-    <!-- Pengumuman End -->
-
-    <!-- Agenda Start -->
-    <div class="container-fluid testimonial py-5" id="agenda">
-        <div class="container py-5">
-            <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-                <h5 class="section-title px-3">Agenda</h5>
-                <h1 class="mb-0">Agenda Kegiatan</h1>
-            </div>
-            <div class="testimonial-carousel owl-carousel">
-
-                @foreach ($agenda as $a )
-                    <div class="testimonial-item text-center rounded pb-4">
-                        <div class="testimonial-comment bg-light rounded p-4">
-                            <p class="text-center mb-3 fw-bolder" style="font-size: 20px"> {{$a->judul}}</p>
-                            <p class="text-center mb-5"> {{$a->keterangan}}
-                            </p>
-
-                            <p class="text-center mb-5"> {{$a->gereja->nama_gereja ?? 'Semua Gereja'}}
-                            </p>
-                        </div>
-                    </div>
-                @endforeach
-
-
-            </div>
-        </div>
-    </div>
-    <!-- Agenda End -->
-
-
-
-
-    <!-- Gallery Start -->
-    <div class="container-fluid gallery py-5 my-5" id="galeri">
-        <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-            <h5 class="section-title px-3">Galeri</h5>
-            <h1 class="mb-4">Foto kegiatan pemuda baptis Papua</h1>
-
-        </div>
-        <div class="tab-class text-center">
-
-            <div class="tab-content">
-                <div id="GalleryTab-1" class="tab-pane fade show p-0 active">
-                    <div class="row g-2 container">
-                        @foreach ($galeri as $g )
-                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
-                            <div class="gallery-item h-100">
-                                <img src="{{asset($g->foto)}}" class="img-fluid w-100 h-100 rounded"
-                                    alt="Image">
-                                <div class="gallery-content">
-                                    <div class="gallery-info">
-                                        <h5 class="text-white text-uppercase mb-2"> {{$g->judul}}</h5>
-                                        <p class="text-center mb-5 text-white"> {{$g->gereja->nama_gereja ?? 'Semua Gereja'}}
-                                        </p>
-
-                                    </div>
-                                </div>
-                                <div class="gallery-plus-icon">
-                                    <a href="{{asset($g->foto)}}" data-title="{{$g->keterangan}}" data-lightbox="{{$g->judul}}"
-                                        class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
-
-                                        {{-- <p class="text-center mb-5 text-white"> {{$g->keterangan}}
-                                        </p> --}}
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- Gallery End -->
-
-
-
-
-
-
-    <!-- Footer Start -->
-    <div class="container-fluid footer py-5">
-        <div class="container py-5">
-            <div class="row g-5">
-
-            </div>
-        </div>
-    </div>
-    <!-- Footer End -->
-
-    <!-- Copyright Start -->
-    <div class="container-fluid copyright text-body py-4">
-        <div class="container">
-            <div class="row g-4 align-items-center">
-                <div class="col-md-12 text-center text-white fw-deco mb-md-0">
-                    <script>document.write(new Date().getFullYear())</script> &copy; Copyrigt <a href="/" class="text-white">  Sistem Informasi Pemuda Baptis Papua Tingkat Wilayah Jayapura, Keerom dan Yahukimo </a>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    </div>
-    <!-- Copyright End -->
-
-    <!-- Back to Top -->
-    <a href="#top" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i
-            class="fa fa-arrow-up"></i></a>
-
-
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="asset-visitor/lib/easing/easing.min.js"></script>
-    <script src="asset-visitor/lib/waypoints/waypoints.min.js"></script>
-    <script src="asset-visitor/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="asset-visitor/lib/lightbox/js/lightbox.min.js"></script>
-
-
-    <!-- Template Javascript -->
-    <script src="asset-visitor/js/main.js"></script>
 </body>
 
 </html>

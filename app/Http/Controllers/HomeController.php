@@ -5,14 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Pengumuman;
 use App\Models\AgendaKegiatan as Agenda;
 use App\Models\Galeri;
+use App\Models\Stunting;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
 
-        return view('home.index',compact('pengumuman','agenda','galeri'));
+
+        $datas = Stunting::where([
+            [function ($query) use ($request) {
+                if (($s = $request->s)) {
+                    $query->orWhere('pendek', 'LIKE', '%' . $s . '%')
+                        ->orWhere('sangat_pendek', 'LIKE', '%' . $s . '%')
+                        ->orWhere('jumlah_balita', 'LIKE', '%' . $s . '%')
+                        ->get();
+                }
+            }]
+        ])->orderBy('id', 'desc')->paginate(10);
+        return view('home.index',compact('datas'))->with('i',(request()->input('page', 1) - 1) * 10);
+
     }
 }
