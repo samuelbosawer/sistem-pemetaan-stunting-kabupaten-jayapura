@@ -35,11 +35,11 @@
 
     <div class="hero_area ">
         <!-- header section strats -->
-        <header class="header_section long_section  p-3 ">
+        <header class="header_section long_section  p-1">
             <nav class="navbar navbar-expand-lg custom_nav-container ">
                 <a class="navbar-brand" href="{{ route('home') }}">
                     <span>
-                        SIPENTING
+                       <img src="{{asset('assets/images/dinkes.png')}}" class="img-fluid" alt="" srcset=""> SIPENTING
                     </span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
