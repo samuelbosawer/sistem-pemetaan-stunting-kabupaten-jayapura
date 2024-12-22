@@ -94,9 +94,9 @@ class StuntingController extends Controller
      */
     public function show(string $id)
     {
-        $puskesmas = Puskesmas::get();
+        $distrik = Distrik::get();
         $data = Stunting::where('id',$id)->first();
-        return view('admin.stunting.create', compact('puskesmas','data'));
+        return view('admin.stunting.create', compact('distrik','data'));
 
     }
 
@@ -105,9 +105,9 @@ class StuntingController extends Controller
      */
     public function edit(string $id)
     {
-        $puskesmas = Puskesmas::get();
+        $distrik = Distrik::get();
         $data = Stunting::where('id',$id)->first();
-        return view('admin.stunting.create', compact('puskesmas','data'));
+        return view('admin.stunting.create', compact('distrik','data'));
     }
 
     /**

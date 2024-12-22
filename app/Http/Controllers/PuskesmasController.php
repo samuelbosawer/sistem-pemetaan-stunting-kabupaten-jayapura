@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Distrik;
 use App\Models\Kelurahan;
 use App\Models\Puskesmas;
 use Illuminate\Http\Request;
@@ -29,8 +30,8 @@ class PuskesmasController extends Controller
      */
     public function create()
     {
-        $kelurahan = Kelurahan::get();
-        return view('admin.puskesmas.create', compact('kelurahan'));
+        $distrik = Distrik::get();
+        return view('admin.puskesmas.create', compact('distrik'));
     }
 
     /**
@@ -38,25 +39,21 @@ class PuskesmasController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate(
             [
                 'nama_puskesmas' => 'required',
-                'kelurahan_id' => 'required',
+                'distrik_id' => 'required',
             ],
             [
                 'nama_puskesmas.required' => 'Tidak boleh kosong',
-                'kelurahan_id.required' => 'Tidak boleh kosong',
+                'distrik_id.required' => 'Tidak boleh kosong',
             ]
         );
         $data = new Puskesmas();
 
         $data->nama_puskesmas   = $request->nama_puskesmas;
-
-        $kel = Kelurahan::find($request->kelurahan_id);
-
-        // dd($kel);
-        $data->distrik_id   = $kel->distrik_id;
-        // $data->kelurahan_id   = $request->kelurahan_id;
+        $data->distrik_id   = $request->distrik_id;
         $data->keterangan   = $request->keterangan;
 
         $data->save();
@@ -97,11 +94,11 @@ class PuskesmasController extends Controller
      */
     public function show(string $id)
     {
-        $kelurahan = Kelurahan::get();
+        $distrik = Distrik::get();
         $data = Puskesmas::where('id',$id)->first();
         $caption = 'Detail Data Puskesmas';
 
-        return view('admin.puskesmas.create', compact('kelurahan','data','caption'));
+        return view('admin.puskesmas.create', compact('distrik','data','caption'));
     }
 
     /**
@@ -109,10 +106,11 @@ class PuskesmasController extends Controller
      */
     public function edit(string $id)
     {
-        $kelurahan = Kelurahan::get();
+        $distrik = Distrik::get();
         $data = Puskesmas::where('id',$id)->first();
-        $caption = 'Ubah Data Puskesmas';
-        return view('admin.puskesmas.create', compact('kelurahan','data','caption'));
+        $caption = 'Detail Data Puskesmas';
+
+        return view('admin.puskesmas.create', compact('distrik','data','caption'));
 
     }
 
@@ -124,22 +122,22 @@ class PuskesmasController extends Controller
         $request->validate(
             [
                 'nama_puskesmas' => 'required',
-                'kelurahan_id' => 'required',
+                'distrik_id' => 'required',
             ],
             [
                 'nama_puskesmas.required' => 'Tidak boleh kosong',
-                'kelurahan_id.required' => 'Tidak boleh kosong',
+                'distrik_id.required' => 'Tidak boleh kosong',
             ]
         );
         $data = Puskesmas::find($id);
 
         $data->nama_puskesmas   = $request->nama_puskesmas;
 
-        $kel = Kelurahan::find($request->kelurahan_id);
+        $kel = Kelurahan::find($request->distrik_id);
 
         // dd($kel);
         $data->distrik_id   = $kel->distrik_id;
-        $data->kelurahan_id   = $request->kelurahan_id;
+        $data->distrik_id   = $request->distrik_id;
         $data->keterangan   = $request->keterangan;
 
         $data->update();

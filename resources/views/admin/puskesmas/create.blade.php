@@ -55,25 +55,23 @@ Data Puskesmas
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
 
-                                                        <label for="latitude"> Kelurahan <span class="text-danger">*</span>
+                                                        <label for="latitude"> Distrik <span class="text-danger">*</span>
                                                         </label>
                                                         <select class="form-control" aria-label="Default select example"
-                                                            name="kelurahan_id">
-                                                            <option value="">Pilih Kelurahan</option>
-                                                            @foreach ($kelurahan as $k)
-
-
-                                                            <option
-                                                            @if($k->id == ($data->kelurahan_id ?? '')) selected @endif
-                                                            value="{{ $k->id }}">
-                                                            {{ $k->nama_kelurahan }}
-                                                        </option>
+                                                            name="distrik_id"
+                                                            @if (Request::segment(3) == 'detail') {{ 'disabled' }} @endif>
+                                                            <option value="">Pilih Distrik</option>
+                                                            @foreach ($distrik as $k)
+                                                                <option @if ($k->id == ($data->distrik_id ?? '')) selected @endif
+                                                                    value="{{ $k->id }}">
+                                                                    {{ $k->nama_distrik }}
+                                                                </option>
                                                             @endforeach
                                                         </select>
-                                                        @if ($errors->has('kelurahan_id'))
-                                                        <label class="text-danger">
-                                                            {{ $errors->first('kelurahan_id') }}
-                                                        </label>
+                                                        @if ($errors->has('distrik_id'))
+                                                            <label class="text-danger">
+                                                                {{ $errors->first('distrik_id') }}
+                                                            </label>
                                                         @endif
                                                     </div>
                                                 </div>
