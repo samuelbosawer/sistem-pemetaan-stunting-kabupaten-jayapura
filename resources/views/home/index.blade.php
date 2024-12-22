@@ -70,8 +70,7 @@
           </div>
           <div class="quote_btn-container">
 
-            @if (Auth::User()->HasRole('admindinas|adminpuskesmas|kepaladinas'))
-
+            @if (Auth::user() && Auth::user()->hasRole('admindinas|adminpuskesmas|kepaladinas'))
             <a class="btn btn-success text-white fw-bold" href="{{route('admin.dashboard')}}">
                 <span>
                   Dasbor
