@@ -198,6 +198,8 @@
                                         <th>C1</th>
                                         <th>C2</th>
                                         <th>C3</th>
+                                        <td>Jarak Terdekat</td>
+                                        <td>Cluster</td>
 
                                     </tr>
                                     @php
@@ -223,6 +225,7 @@
 
 
                                             <td>
+
                                                 <?php
                                                 if (is_array($c1)) {
                                                     $c1_jb = isset($c1[0][0]->jumlah_balita) ? intval($c1[0][0]->jumlah_balita) : 0;
@@ -239,23 +242,100 @@
                                                 $data_sp = isset($data->sangat_pendek) ? intval($data->sangat_pendek) : 0;
                                                 $data_p = isset($data->pendek) ? intval($data->pendek) : 0;
 
-                                                // $c1 = pow($data_jb - $c1_jb, 2) + pow($data_sp - $c1_sp, 2)+ pow($data_p - $c1_p, 2);
-                                                $c1_result = pow(($data_jb - $c1_jb), 2);
+                                                $c1_result = round(sqrt(pow($data_jb - $c1_jb, 2) + pow($data_sp - $c1_sp, 2)+ pow($data_p - $c1_p, 2)),8);
 
 
-                                            //     echo ($c1);
-                                            //    echo" <br>";
-                                            //     echo ($data_jb);
-                                            //    echo" <br>";
 
+                                                $c1_array[] = $c1_result;
                                                 echo ($c1_result);
-                                                $c1_result =0;
+
+                                                ?>
+
+
+
+                                            </td>
+
+
+                                            <td>
+                                                <?php
+                                                if (is_array($c1)) {
+                                                    $c1_jb = isset($c1[1][0]->jumlah_balita) ? intval($c1[1][0]->jumlah_balita) : 0;
+                                                    $c1_sp = isset($c1[1][0]->sangat_pendek) ? intval($c1[1][0]->sangat_pendek) : 0;
+                                                    $c1_p = isset($c1[1][0]->pendek) ? intval($c1[1][0]->pendek) : 0;
+                                                } else {
+
+                                                    $c1_jb = 0;
+                                                    $c1_sp = 0;
+                                                    $c1_p = 0;
+                                                }
+
+                                                $data_jb = isset($data->jumlah_balita) ? intval($data->jumlah_balita) : 0;
+                                                $data_sp = isset($data->sangat_pendek) ? intval($data->sangat_pendek) : 0;
+                                                $data_p = isset($data->pendek) ? intval($data->pendek) : 0;
+
+                                                $c2_result = round(sqrt(pow($data_jb - $c1_jb, 2) + pow($data_sp - $c1_sp, 2)+ pow($data_p - $c1_p, 2)),8);
+
+
+                                                $c2_array[] = $c2_result;
+
+                                                echo ($c2_result);
+
                                                 ?>
 
 
                                             </td>
-                                            <td> </td>
-                                            <td> </td>
+
+                                            <td>
+                                                <?php
+                                                if (is_array($c1)) {
+                                                    $c1_jb = isset($c1[2][0]->jumlah_balita) ? intval($c1[2][0]->jumlah_balita) : 0;
+                                                    $c1_sp = isset($c1[2][0]->sangat_pendek) ? intval($c1[2][0]->sangat_pendek) : 0;
+                                                    $c1_p = isset($c1[2][0]->pendek) ? intval($c1[2][0]->pendek) : 0;
+                                                } else {
+
+                                                    $c1_jb = 0;
+                                                    $c1_sp = 0;
+                                                    $c1_p = 0;
+                                                }
+
+                                                $data_jb = isset($data->jumlah_balita) ? intval($data->jumlah_balita) : 0;
+                                                $data_sp = isset($data->sangat_pendek) ? intval($data->sangat_pendek) : 0;
+                                                $data_p = isset($data->pendek) ? intval($data->pendek) : 0;
+
+
+                                                $c3_result = round(sqrt(pow($data_jb - $c1_jb, 2) + pow($data_sp - $c1_sp, 2)+ pow($data_p - $c1_p, 2)),8);
+
+
+                                                $c3_array[] = $c3_result;
+
+
+                                                echo ($c3_result);
+
+                                                ?>
+
+
+
+
+                                            </td>
+
+                                            <td>
+                                                {{ (min([$c1_result, $c2_result, $c3_result])) }}
+                                            </td>
+
+                                            <td>
+                                                @if($c1_result<$c2_result AND $c1_result < $c3_result)
+                                                    1
+                                                @endif
+
+                                                @if($c2_result<$c1_result AND $c2_result < $c3_result)
+                                                    2
+                                                @endif
+
+                                                @if($c3_result<$c1_result AND $c3_result < $c2_result)
+                                                    3
+                                                @endif
+
+                                            </td>
                                             @endforeach
 
                                         </tr>
