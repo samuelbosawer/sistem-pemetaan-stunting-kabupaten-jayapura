@@ -52,6 +52,9 @@
             let table = new DataTable('#myTable');
         </script>
 
+
+
+
 <!-- Third Party js-->
 @stack('script-footer')
 

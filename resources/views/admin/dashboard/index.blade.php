@@ -145,7 +145,6 @@
                     </div>
                 </div>
 
-
             </div> <!-- container -->
 
         </div> <!-- content -->
@@ -200,6 +199,11 @@
             {{$p->distrik->stunting->sum('sangat_pendek')}}
         </span>
     </p>
+
+    <div class="text-center p-3">
+        <a target="_blank" href="{{route('admin.peta.kelurahan',$p->distrik_id)}}">Detail Kelurahan</a>
+
+    </div>
     `);
 @endforeach
 

@@ -19,7 +19,7 @@ class DashboardController extends Controller
     {
 
 
-        $distrik = Distrik::get()->count();
+        $distrik = Distrik::where('nama_distrik', '!=', Null)->get()->count();
         $kelurahan = Kelurahan::get()->count();
         $puskesmas = Puskesmas::get()->count();
         $stunting = Stunting::get()->count();
@@ -29,6 +29,14 @@ class DashboardController extends Controller
 
 
         return view('admin.dashboard.index', compact('distrik','kelurahan','puskesmas','stunting','pengguna','pus'));
+    }
+
+    public function peta($id)
+    {
+        $distrik = Distrik::where('id',$id)->first();
+        $kelurahan = Kelurahan::where('distrik_id',$id)->get();
+
+        return view('admin.dashboard.kelurahan-peta', compact('distrik','kelurahan'));
     }
 
 

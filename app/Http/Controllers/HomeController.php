@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengumuman;
 use App\Models\AgendaKegiatan as Agenda;
+use App\Models\Distrik;
 use App\Models\Galeri;
+use App\Models\Kelurahan;
 use App\Models\Puskesmas;
 use App\Models\Stunting;
 use Illuminate\Http\Request;
@@ -17,20 +19,18 @@ class HomeController extends Controller
     {
 
 
-        $datas = Stunting::where([
-            [function ($query) use ($request) {
-                if (($s = $request->s)) {
-                    $query->orWhere('pendek', 'LIKE', '%' . $s . '%')
-                        ->orWhere('sangat_pendek', 'LIKE', '%' . $s . '%')
-                        ->orWhere('jumlah_balita', 'LIKE', '%' . $s . '%')
-                        ->get();
-                }
-            }]
-        ])->orderBy('id', 'desc')->paginate(10);
+        $datas = Stunting::orderBy('id', 'desc')->get();
 
         $pus = Puskesmas::with('distrik.stunting')->get();
 
-        return view('home.index',compact('datas','pus'))->with('i',(request()->input('page', 1) - 1) * 10);
+        return view('home.index',compact('datas','pus'));
 
+    }
+
+    public function peta($id)
+    {
+        $distrik = Distrik::where('id',$id)->first();
+        $kelurahan = Kelurahan::where('distrik_id',$id)->get();
+        return view('home.detail-peta',compact('distrik','kelurahan'));
     }
 }

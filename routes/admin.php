@@ -10,6 +10,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         // Dashboard
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard/peta/kelurahan/{id}', [DashboardController::class, 'peta'])->name('peta.kelurahan');
 
             require_once 'admin/kelurahan.php';
             require_once 'admin/distrik.php';

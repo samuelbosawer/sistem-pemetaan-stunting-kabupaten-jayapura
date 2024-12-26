@@ -87,7 +87,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
                                                         <label for="keterangan"> Keterangan </label>
-                                                        <textarea id="keterangan" @if (Request::segment(3) == 'detail') disabled @endif name="keterangan"
+                                                        <textarea  id="summernote" @if (Request::segment(3) == 'detail') disabled @endif name="keterangan"
                                                             placeholder="Masukan keterangan" rows="5" class="form-control">{{ old('keterangan') ?? ($data->keterangan ?? '') }} </textarea>
                                                     </div>
                                                 </div>

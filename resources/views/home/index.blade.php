@@ -29,6 +29,8 @@
     <!-- responsive style -->
     <link href="/assets-visitor/css/responsive.css" rel="stylesheet" />
 
+        <!-- Data table -->
+
 </head>
 
 <body>
@@ -303,16 +305,18 @@
                                     <div class="">
                                         <div class="row mt-3 d-flex justify-content-between">
                                             <div class="col-8">
-                                                @include('admin.layout.search')
-                                            </div>
+                                                {{-- @include('admin.layout.search')
+                                            </div> --}}
 
 
 
                                         </div>
                                     </div>
-
+                                    @php
+                                        $i = 0;
+                                    @endphp
                                     <div class="mt-3 table-responsive">
-                                        <table class="table table-bordered">
+                                        <table id="myTable" class="table table-bordered">
                                             <tr class="bg-success text-white">
                                                 <th width="1%">No</th>
                                                 <th class="text-center">Tanggal Update</th>
@@ -356,8 +360,7 @@
 
                                         </table>
                                     </div>
-                                    <!-- end .mt-4 -->
-                                    {!! $datas->links() !!}
+
 
 
                                 </div> <!-- end card-body-->
@@ -492,17 +495,15 @@
     <!-- footer section -->
 
 
+
     <!-- jQery -->
     <script src="/assets-visitor/js/jquery-3.4.1.min.js"></script>
     <!-- bootstrap js -->
     <script src="/assets-visitor/js/bootstrap.js"></script>
     <!-- custom js -->
     <script src="/assets-visitor/js/custom.js"></script>
-    <!-- Google Map -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-    </script>
-    <!-- End Google Map -->
 
+    <!-- End Google Map -->
 
 
 
@@ -564,6 +565,11 @@ PUSKESMAS {{ $p->nama_puskesmas }} <br>
       {{ $p->distrik->stunting->sum('sangat_pendek') }}
   </span>
 </p>
+<br>
+ <div class="text-center p-3">
+        <a target="_blank" href="{{route('home.peta.kelurahan',$p->distrik_id)}}">Detail Kelurahan</a>
+
+    </div>
 `);
         @endforeach
 
@@ -575,6 +581,9 @@ PUSKESMAS {{ $p->nama_puskesmas }} <br>
             lng: 140.435791
         }, 9); // Papua, Indonesia coordinates
     </script>
+
+
+
 </body>
 
 </html>
